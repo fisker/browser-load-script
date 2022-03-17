@@ -1,6 +1,6 @@
 {
   "name": "browser-load-script",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Load script in browser.",
   "homepage": "https://github.com/fisker/browser-load-script#readme",
   "bugs": {
