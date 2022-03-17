@@ -2,7 +2,10 @@ function loadScript(source, options) {
   const {head} = document
   const script = document.createElement('script')
 
-  const {attributes} = {...options}
+  const {attributes, keepScriptElement} = {
+    keepScriptElement: false,
+    ...options,
+  }
 
   Object.assign(script, attributes)
 
@@ -12,6 +15,9 @@ function loadScript(source, options) {
     script.addEventListener(
       'load',
       () => {
+        if (!keepScriptElement) {
+          head.removeChild(script)
+        }
         resolve(script)
       },
       false,
