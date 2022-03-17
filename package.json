@@ -1,0 +1,63 @@
+{
+  "name": "browser-load-script",
+  "version": "0.0.0",
+  "description": "Load script in browser.",
+  "homepage": "https://github.com/fisker/browser-load-script#readme",
+  "bugs": {
+    "url": "https://github.com/fisker/browser-load-script/issues"
+  },
+  "repository": "fisker/browser-load-script",
+  "funding": "https://github.com/fisker/browser-load-script?sponsor=1",
+  "license": "MIT",
+  "author": {
+    "name": "fisker Cheung",
+    "email": "lionkay@gmail.com",
+    "url": "https://www.fiskercheung.com/"
+  },
+  "sideEffects": false,
+  "type": "module",
+  "exports": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "scripts": {
+    "build": "echo no need",
+    "build:js": "rollup --config",
+    "clean": "run-p clean:*",
+    "clean:dist": "del-cli dist",
+    "dist": "run-p dist:*",
+    "dist:npm": "np --yolo --no-yarn",
+    "format": "run-p format:*",
+    "format:eslint": "yarn lint:eslint --fix",
+    "format:markdown": "yarn lint:markdown --fix",
+    "format:package-json": "sort-package-json \"package.json\" \"packages/*/package.json\"",
+    "format:prettier": "yarn lint:prettier --write",
+    "lint": "run-p lint:*",
+    "lint:eslint": "eslint \"**/*.{js,mjs,cjs,vue}\"",
+    "lint:markdown": "markdownlint \"**/*.md\" --ignore \"**/node_modules/**\"",
+    "lint:package-json": "yarn run format:package-json --check",
+    "lint:prettier": "prettier \"**/*.{css,html,js,cjs,mjs,json,less,md,scss,ts,vue,yaml,yml}\" --check",
+    "release": "run-s clean lint build test format dist",
+    "test": "echo test not added"
+  },
+  "devDependencies": {
+    "@fisker/commitlint-config": "2.0.2",
+    "@fisker/eslint-config": "10.0.13",
+    "@fisker/eslint-config-jest": "3.0.8",
+    "@fisker/husky-config": "4.1.2",
+    "@fisker/lint-staged-config": "3.1.4",
+    "@fisker/prettier-config": "5.0.5",
+    "del-cli": "4.0.1",
+    "eslint": "8.11.0",
+    "husky": "7.0.4",
+    "lint-staged": "12.3.6",
+    "markdownlint-cli": "0.31.1",
+    "npm-run-all": "4.1.5",
+    "prettier": "2.6.0",
+    "sort-package-json": "1.54.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}
