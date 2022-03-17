@@ -1,6 +1,6 @@
 {
   "name": "browser-load-script",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Load script in browser.",
   "homepage": "https://github.com/fisker/browser-load-script#readme",
   "bugs": {
@@ -16,7 +16,7 @@
   },
   "sideEffects": false,
   "type": "module",
-  "exports": "index.js",
+  "exports": "./index.js",
   "files": [
     "index.js"
   ],
