@@ -20,6 +20,7 @@ function loadScript(source, options) {
     script.addEventListener(
       'error',
       () => {
+        head.removeChild(script)
         reject(new Error(`Failed to load script: ${source}`))
       },
       false,
