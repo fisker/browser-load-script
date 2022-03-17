@@ -25,6 +25,13 @@ yarn add browser-load-script
 ## Usage
 
 ```html
+<script type="importmap">
+  {
+    "imports": {
+      "browser-load-script": "https://unpkg.com/browser-load-script"
+    }
+  }
+</script>
 <script type="module">
   import loadScript from 'browser-load-script'
 
