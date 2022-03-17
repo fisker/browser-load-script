@@ -18,7 +18,9 @@
   "type": "module",
   "exports": "./index.js",
   "files": [
-    "index.js"
+    "index.js",
+    "script.js",
+    "worker.js"
   ],
   "scripts": {
     "build": "echo no need",
