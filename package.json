@@ -41,6 +41,7 @@
     "lint:prettier": "prettier . --check",
     "release": "run-s clean lint build test fix dist",
     "test": "echo test not added",
+"test-coverage":"yarn test",
     "prepare": "husky"
   },
   "devDependencies": {
