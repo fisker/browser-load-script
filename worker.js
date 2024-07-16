@@ -1,11 +1,11 @@
 function createWorker(onLoad) {
   const workerCode = /* indent */ `
-    self.onmessage = function (event) {
-      const source = event.data
+    self.onmessage = async function (event) {
+      const {source} = event.data
       self.importScripts(source)
 
       try {
-        const result = (${onLoad.toString()})(self)
+        const result = await (${onLoad.toString()}).call(self, self)
         self.postMessage(result)
       } finally {
         self.close();
@@ -20,20 +20,28 @@ function createWorker(onLoad) {
   return worker
 }
 
-function loadScript(source, onLoad) {
+async function loadScript(source, onLoad) {
   const worker = createWorker(onLoad)
-  worker.postMessage(source)
 
-  return new Promise(function (resolve, reject) {
-    worker.addEventListener('message', ({data}) => {
-      resolve(data)
-    })
+  const on = (event, callback) => {
+    worker.addEventListener(event, callback, {once: true, passive: true})
+  }
 
-    worker.addEventListener('error', ({message}) => {
-      worker.terminate()
-      reject(new Error(message))
+  try {
+    return await new Promise((resolve, reject) => {
+      on('message', ({data}) => {
+        resolve(data)
+      })
+
+      on('error', ({message}) => {
+        reject(new Error(message))
+      })
+
+      worker.postMessage({src: source})
     })
-  })
+  } finally {
+    worker.terminate()
+  }
 }
 
 export default loadScript

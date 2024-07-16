@@ -1,45 +1,28 @@
-const setAttributes = (element, attributes) => {
-  if (!attributes) {
-    return
+async function loadScript(properties) {
+  if (typeof properties === 'string') {
+    properties = {src: properties}
   }
 
-  for (const attribute in attributes) {
-    if (!Object.prototype.hasOwnProperty.call(attributes, attribute)) {
-      continue
-    }
-
-    element.setAttribute(attribute, attributes[attribute])
-  }
-}
-
-function loadScript(source, options) {
   const {head} = document
-  const script = document.createElement('script')
+  const script = Object.assign(document.createElement('script'), properties)
 
-  const {attributes, keepScriptElement} = {
-    keepScriptElement: false,
-    ...options,
+  function on(event, callback) {
+    script.addEventListener(event, callback, {once: true, passive: true})
   }
 
-  setAttributes(script, attributes)
+  try {
+    await new Promise((resolve, reject) => {
+      on('load', resolve)
 
-  script.src = source
+      on('error', () => {
+        reject(new Error(`Failed to load script '${properties.src}'.`))
+      })
 
-  return new Promise(function (resolve, reject) {
-    script.addEventListener('load', () => {
-      if (!keepScriptElement) {
-        head.removeChild(script)
-      }
-      resolve(script)
+      head.appendChild(script)
     })
-
-    script.addEventListener('error', () => {
-      head.removeChild(script)
-      reject(new Error(`Failed to load script: ${source}`))
-    })
-
-    head.appendChild(script)
-  })
+  } finally {
+    head.removeChild(script)
+  }
 }
 
 export default loadScript

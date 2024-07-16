@@ -35,13 +35,32 @@ yarn add browser-load-script
 <script type="module">
   import loadScript from 'browser-load-script'
 
-  console.log(await loadScript('data:application/javascript,'))
-  // -> `<script ...>`
+  await loadScript('data:application/javascript,')
 </script>
 ```
 
 ## API
 
-### `loadScript(src, options?)`
+### `loadScript(sourceOrProperties)`
 
-[TBD]
+```js
+import loadScript from 'browser-load-script'
+
+await loadScript('https://example.com/script.js')
+```
+
+#### `sourceOrProperties`
+
+- Type: `string | Object`
+
+[Available properties](https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement#instance_properties)
+
+```js
+import loadScript from 'browser-load-script'
+
+await loadScript({
+  src: 'https://example.com/script.js',
+  defer: true,
+  crossOrigin: 'anonymous',
+})
+```
