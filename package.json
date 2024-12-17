@@ -46,7 +46,7 @@
   },
   "devDependencies": {
     "@fisker/eslint-config": "13.1.3",
-    "@fisker/eslint-config-jest": "4.1.1",
+    "@fisker/eslint-config-jest": "4.1.3",
     "@fisker/husky-config": "4.1.3",
     "@fisker/lint-staged-config": "3.3.2",
     "@fisker/markdownlint-cli2-config": "0.0.3",
